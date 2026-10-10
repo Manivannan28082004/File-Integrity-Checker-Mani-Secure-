@@ -1,0 +1,150 @@
+[
+    {
+        "file": "https://www.scribd.com/document/768381595/Linux-Admin-Handbook-TechNow-Tamil-Free-Ver1-3",
+        "status": "SAFE URL"
+    },
+    {
+        "file": "sample.txt",
+        "status": "WARNING - FILE TAMPERED"
+    },
+    {
+        "file": "sample.txt",
+        "status": "WARNING - FILE TAMPERED"
+    },
+    {
+        "file": "https://www.scribd.com/document/768381595/Linux-Admin-Handbook-TechNow-Tamil-Free-Ver1-3",
+        "status": "SAFE URL"
+    },
+    {
+        "file": "https;//google.com",
+        "status": "SUSPICIOUS URL"
+    },
+    {
+        "file": "https;//google.com",
+        "status": "SUSPICIOUS URL"
+    },
+    {
+        "file": "https;//google.com",
+        "status": "SUSPICIOUS URL"
+    },
+    {
+        "file": "https;//google.com",
+        "status": "SUSPICIOUS URL"
+    },
+    {
+        "file": "IMG_20240501_111122.jpg",
+        "status": "SAFE - HASH SAVED"
+    },
+    {
+        "file": "sample.txt",
+        "status": "WARNING - FILE TAMPERED"
+    },
+    {
+        "file": "sample.txt",
+        "status": "WARNING - FILE TAMPERED"
+    },
+    {
+        "file": "sample.txt",
+        "status": "WARNING - FILE TAMPERED"
+    },
+    {
+        "file": "sample.txt",
+        "status": "WARNING - FILE TAMPERED"
+    },
+    {
+        "file": "sample.txt",
+        "status": "WARNING - FILE TAMPERED"
+    },
+    {
+        "file": "sample.txt",
+        "status": "WARNING - FILE TAMPERED"
+    },
+    {
+        "file": "sample.txt",
+        "status": "WARNING - FILE TAMPERED"
+    },
+    {
+        "file": "sample.txt",
+        "status": "WARNING - FILE TAMPERED"
+    },
+    {
+        "file": "IMG_3498.JPG",
+        "status": "SAFE - HASH SAVED"
+    },
+    {
+        "file": "https://free-login-bonus.xyz",
+        "status": "SAFE URL"
+    },
+    {
+        "file": "https://free-login-bonus.xyz",
+        "status": "SUSPICIOUS URL"
+    },
+    {
+        "file": "https://free-login-bonus.xyz",
+        "status": "SUSPICIOUS URL"
+    },
+    {
+        "file": "https://google.com",
+        "status": "SAFE URL"
+    },
+    {
+        "file": "https://github.com",
+        "status": "SAFE URL"
+    },
+    {
+        "file": "hacktool.exe",
+        "status": "WARNING - POSSIBLE MALWARE"
+    },
+    {
+        "file": "hacktool.exe",
+        "status": "WARNING - POSSIBLE MALWARE"
+    },
+    {
+        "file": "https://google.com",
+        "status": "SAFE URL"
+    },
+    {
+        "file": "https://google.com",
+        "status": "SAFE URL"
+    },
+    {
+        "file": "project.txt",
+        "status": "SAFE - HASH SAVED"
+    },
+    {
+        "file": "project.txt",
+        "status": "SAFE - INTEGRITY OK"
+    },
+    {
+        "file": "project.txt",
+        "status": "WARNING - FILE TAMPERED"
+    },
+    {
+        "file": "https://google.com",
+        "status": "SAFE URL"
+    },
+    {
+        "file": "https://free-login-bonus.xyz",
+        "status": "SUSPICIOUS URL"
+    },
+    {
+        "file": "message.txt",
+        "status": "SAFE - HASH SAVED"
+    },
+    {
+        "file": "message.txt",
+        "status": "SAFE - INTEGRITY OK"
+    },
+    {
+        "file": "message.txt",
+        "status": "SAFE - INTEGRITY OK"
+    },
+    {
+        "file": "message.txt",
+        "status": "SAFE - INTEGRITY OK"
+    },
+    {
+        "file": "message.txt",
+        "status": "WARNING - FILE TAMPERED"
+    }
+]

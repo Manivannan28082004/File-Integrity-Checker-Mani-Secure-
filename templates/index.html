@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>MANI SECURE</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="main-layout">
+
+    <!-- SIDEBAR -->
+
+    <div class="sidebar">
+
+        <div class="logo">
+
+            <div class="logo-top">
+
+                <div class="shield">
+                    🛡
+                </div>
+
+                <div>
+
+                    <h1>MANI <span>SECURE</span></h1>
+
+                    <p>FILE INTEGRITY SYSTEM</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- MENU -->
+
+        <div class="menu">
+
+            <a onclick="showPage('home-page')">
+
+                HOME
+
+            </a>
+
+            <a onclick="showPage('history-page')">
+
+                SCAN HISTORY
+
+            </a>
+
+            <a onclick="showPage('settings-page')">
+
+                SETTINGS
+
+            </a>
+
+            <a onclick="showPage('about-page')">
+
+                ABOUT
+
+            </a>
+
+        </div>
+
+        <!-- SYSTEM STATUS -->
+
+        <div class="system-box">
+
+            <h3>SYSTEM STATUS</h3>
+
+            <p>
+
+                Engine
+
+                <span>Online</span>
+
+            </p>
+
+            <p>
+
+                Database
+
+                <span>Updated</span>
+
+            </p>
+
+            <p>
+
+                Threat DB
+
+                <span>1.2.0</span>
+
+            </p>
+
+        </div>
+
+    </div>
+
+    <!-- CONTENT -->
+
+    <div class="content">
+
+        <!-- HOME PAGE -->
+
+        <div id="home-page"
+             class="side-page">
+
+            <!-- DASHBOARD -->
+
+            <div class="dashboard">
+
+                <div class="card">
+
+                    <h2>{{ files_scanned }}</h2>
+
+                    <p>FILES SCANNED</p>
+
+                </div>
+
+                <div class="card green">
+
+                    <h2>{{ safe_count }}</h2>
+
+                    <p>INTEGRITY OK</p>
+
+                </div>
+
+                <div class="card red">
+
+                    <h2>{{ tampered_count }}</h2>
+
+                    <p>TAMPERED</p>
+
+                </div>
+
+                <div class="card yellow">
+
+                    <h2>{{ threat_score }}</h2>
+
+                    <p>WARNINGS</p>
+
+                </div>
+
+            </div>
+
+            <!-- MAIN SECTION -->
+
+            <div class="main-section">
+
+                <!-- LEFT PANEL -->
+
+                <div class="left-panel">
+
+                    <!-- URL SCAN -->
+
+                    <form method="POST">
+
+                        <div class="url-box">
+
+                            <input type="text"
+                                   name="url"
+                                   placeholder="Enter URL to scan">
+
+                            <button type="submit">
+
+                                SCAN URL
+
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                    <!-- FILE UPLOAD -->
+
+                    <div class="upload-box">
+
+                        <form method="POST"
+                              enctype="multipart/form-data">
+
+                            <div id="drop-area">
+
+                                <div class="upload-icon">
+
+                                    ☁
+
+                                </div>
+
+                                <h2>
+
+                                    Drop a file to verify integrity
+
+                                </h2>
+
+                                <p>
+
+                                    Analyse suspicious files and verify checksums
+
+                                </p>
+                                <a href="/folder-monitor"
+   class="folder-btn">
+
+    FOLDER MONITOR
+
+</a>
+
+                                <input type="file"
+                                       name="file"
+                                       required>
+
+                            </div>
+
+                            <button type="submit"
+                                    class="verify-btn">
+
+                                VERIFY INTEGRITY
+
+                            </button>
+
+                        </form>
+
+                    </div>
+
+                    <!-- OUTPUT -->
+
+                    {% if hash_result %}
+
+                    <div class="result">
+
+                        <h2>OUTPUT</h2>
+
+                        <textarea readonly>
+
+{{ hash_result }}
+
+                        </textarea>
+
+                    </div>
+
+                    {% endif %}
+
+                </div>
+
+                <!-- RIGHT PANEL -->
+
+                <div class="right-panel">
+
+                    <div class="info-box">
+
+                        <h2>SCAN RESULT</h2>
+
+                        <p>File Name</p>
+
+                        <span>
+
+{% if filename and filename|length > 50 %}
+
+{{ filename[:50] }}...
+
+{% else %}
+
+{{ filename }}
+
+{% endif %}
+
+                        </span>
+
+                        <p>Status</p>
+
+                        <span>
+
+                            {{ status }}
+
+                        </span>
+
+                        <p>Threat Score</p>
+
+                        <span>
+
+                            {{ threat_score }}/100
+
+                        </span>
+
+                        <p>Scan Time</p>
+
+                        <span>
+
+                            {{ scan_time }}
+
+                        </span>
+
+                    </div>
+
+                   <div class="integrity-box">
+
+    <h2>INTEGRITY STATUS</h2>
+
+    {% if status %}
+
+        {% if "SAFE" in status %}
+
+            <div class="safe-box">
+                {{ status }}
+            </div>
+
+        {% elif "WARNING" in status %}
+
+            <div class="danger-box">
+                {{ status }}
+            </div>
+
+        {% else %}
+
+            <div class="warning-box">
+                {{ status }}
+            </div>
+
+        {% endif %}
+
+    {% else %}
+
+        <p>Upload a file to verify integrity</p>
+
+    {% endif %}
+
+</div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- HISTORY PAGE -->
+
+        <div id="history-page"
+             class="side-page"
+             style="display:none;">
+
+            <div class="history">
+
+                <h2>SCAN HISTORY</h2>
+
+                <table>
+
+                    <tr>
+
+                        <th>File</th>
+
+                        <th>Status</th>
+
+                    </tr>
+
+                    {% for item in history %}
+
+                    <tr>
+
+                        <td>
+
+{{ item.file }}
+
+                        </td>
+
+                        <td>
+
+{{ item.status }}
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </table>
+
+            </div>
+
+        </div>
+
+    <!-- SETTINGS PAGE -->
+
+<div id="settings-page"
+     class="side-page"
+     style="display:none;">
+
+    <div class="settings-container">
+
+        <div class="settings-header">
+
+            <h1>SECURITY SETTINGS</h1>
+
+            <p>
+                Configure Mani Secure protection engine
+            </p>
+
+        </div>
+
+        <div class="settings-grid">
+
+            <div class="setting-card">
+
+                <div class="setting-left">
+
+                    <h3>Dark Mode</h3>
+
+                    <p>
+                        Enable secure dark interface
+                    </p>
+
+                </div>
+
+                <label class="switch">
+
+                    <input type="checkbox" checked>
+
+                    <span class="slider"></span>
+
+                </label>
+
+            </div>
+
+            <div class="setting-card">
+
+                <div class="setting-left">
+
+                    <h3>Auto Scan</h3>
+
+                    <p>
+                        Automatically scan uploaded files
+                    </p>
+
+                </div>
+
+                <label class="switch">
+
+                    <input type="checkbox" checked>
+
+                    <span class="slider"></span>
+
+                </label>
+
+            </div>
+
+            <div class="setting-card">
+
+                <div class="setting-left">
+
+                    <h3>Threat Detection</h3>
+
+                    <p>
+                        Advanced malware detection engine
+                    </p>
+
+                </div>
+
+                <label class="switch">
+
+                    <input type="checkbox" checked>
+
+                    <span class="slider"></span>
+
+                </label>
+
+            </div>
+
+            <div class="setting-card">
+
+                <div class="setting-left">
+
+                    <h3>SHA-256 Protection</h3>
+
+                    <p>
+                        Real-time checksum verification
+                    </p>
+
+                </div>
+
+                <button class="active-security">
+
+                    ACTIVE
+
+                </button>
+
+            </div>
+ 
+       </div>
+
+    </div>
+
+</div>
+       <!-- ABOUT PAGE -->
+
+<div id="about-page"
+     class="side-page"
+     style="display:none;">
+
+    <div class="about-container">
+
+        <div class="about-header">
+
+            <h1>ABOUT</h1>
+
+            <p>
+                Cyber Security Project Information
+            </p>
+
+        </div>
+
+        <!-- SINGLE BOX -->
+
+        <div class="about-full-box">
+
+            <!-- TOP -->
+
+            <div class="about-top">
+
+                <div class="profile-mini">
+
+                    M
+
+                </div>
+
+                <div class="about-info">
+
+                    <div class="about-row">
+
+                        <span>Name</span>
+
+                        <p>Manivannan</p>
+
+                    </div>
+
+                    <div class="about-row">
+
+                        <span>Department</span>
+
+                        <p>Cyber Security</p>
+
+                    </div>
+
+                    <div class="about-row">
+
+                        <span>Project</span>
+
+                        <p>
+                            File Integrity Verification System
+                        </p>
+
+                    </div>
+
+                    <div class="about-row">
+
+                        <span>Technology</span>
+
+                        <p>
+                            Python, Flask, SHA-256
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- FEATURES -->
+
+            <div class="feature-section">
+
+                <h2>FEATURES</h2>
+
+                <ul>
+
+                    <li>
+                        Select and scan files securely
+                    </li>
+
+                    <li>
+                        Save SHA-256 hashes automatically
+                    </li>
+
+                    <li>
+                        Detect modified files instantly
+                    </li>
+
+                    <li>
+                        Detect suspicious URLs
+                    </li>
+
+                    <li>
+                        Real-time integrity verification
+                    </li>
+
+                    <li>
+                        Modern dark cyber security dashboard
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+<!-- JAVASCRIPT -->
+
+<script>
+
+function showPage(pageId){
+
+    let pages =
+        document.getElementsByClassName(
+            "side-page"
+        );
+
+    for(let i=0; i<pages.length; i++){
+
+        pages[i].style.display = "none";
+    }
+
+    document.getElementById(pageId)
+        .style.display = "block";
+}
+
+</script>
+
+</body>
+
+</html>

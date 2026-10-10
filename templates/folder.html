@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>Folder Monitor</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static',
+          filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="folder-page">
+
+    <h1>FOLDER SECURITY MONITOR</h1>
+
+    <table>
+
+        <tr>
+
+            <th>File</th>
+
+            <th>Status</th>
+
+            <th>Threat Score</th>
+
+        </tr>
+
+        {% for file in files %}
+
+        <tr>
+
+            <td>{{ file.name }}</td>
+
+            <td>
+
+                {% if "SAFE" in file.status %}
+
+                    <span class="safe-text">
+
+                        {{ file.status }}
+
+                    </span>
+
+                {% else %}
+
+                    <span class="danger-text">
+
+                        {{ file.status }}
+
+                    </span>
+
+                {% endif %}
+
+            </td>
+
+            <td>
+
+                {{ file.threat_score }}/100
+
+            </td>
+
+        </tr>
+
+        {% endfor %}
+
+    </table>
+
+</div>
+
+</body>
+</html>
